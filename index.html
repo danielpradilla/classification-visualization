@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classification Model Visualizer</title>
+    <meta
+      name="description"
+      content="Interactive visual explanations of supervised classifiers and unsupervised clustering models."
+    />
+    <link rel="stylesheet" href="shared.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>Classification, visualized</h1>
+        </div>
+        <nav class="header-nav" aria-label="Related pages">
+          <a class="model-wall-link" href="compare.html">Classification Model Wall</a>
+          <a class="styleguide-link" href="styleguide.html">Styleguide</a>
+        </nav>
+      </header>
+
+      <section class="workspace" aria-label="Model visualization workspace">
+        <aside class="control-panel" aria-label="Controls">
+          <section class="how-to-use" aria-labelledby="howToUseTitle">
+            <h2 id="howToUseTitle">How to use</h2>
+            <p>
+              Pick a model and dataset, then adjust the controls to see how the decision regions or clusters change.
+            </p>
+          </section>
+
+          <div class="control-group">
+            <label for="modelSelect">Model</label>
+            <select id="modelSelect"></select>
+          </div>
+
+          <div class="control-group">
+            <label for="datasetSelect">Dataset</label>
+            <select id="datasetSelect"></select>
+          </div>
+
+          <div class="split-control" role="group" aria-label="Mode">
+            <button class="mode-tab active" type="button" data-mode="supervised">Supervised</button>
+            <button class="mode-tab" type="button" data-mode="unsupervised">Unsupervised</button>
+          </div>
+
+          <div class="slider-group">
+            <label for="sampleSlider">
+              Samples
+              <output id="sampleValue">180</output>
+            </label>
+            <input id="sampleSlider" type="range" min="80" max="320" step="20" value="180" />
+          </div>
+
+          <div class="slider-group">
+            <label for="noiseSlider">
+              Noise
+              <output id="noiseValue">0.12</output>
+            </label>
+            <input id="noiseSlider" type="range" min="0" max="0.34" step="0.02" value="0.12" />
+          </div>
+
+          <div class="slider-group" id="kControl">
+            <label for="kSlider">
+              <span id="kLabelText">Neighbors / clusters</span>
+              <output id="kValue">5</output>
+            </label>
+            <input id="kSlider" type="range" min="2" max="12" step="1" value="5" />
+          </div>
+
+          <div class="slider-group" id="regularizationControl">
+            <label for="regularizationSlider">
+              Regularization C
+              <output id="regularizationValue">1.00</output>
+            </label>
+            <input id="regularizationSlider" type="range" min="0.10" max="5.00" step="0.10" value="1.00" />
+          </div>
+
+          <div class="slider-group" id="depthControl">
+            <label for="depthSlider">
+              Tree depth
+              <output id="depthValue">3</output>
+            </label>
+            <input id="depthSlider" type="range" min="1" max="6" step="1" value="3" />
+          </div>
+
+          <div class="slider-group" id="radiusControl">
+            <label for="radiusSlider">
+              Density radius
+              <output id="radiusValue">0.28</output>
+            </label>
+            <input id="radiusSlider" type="range" min="0.12" max="0.52" step="0.02" value="0.28" />
+          </div>
+
+          <div class="slider-group" id="kernelControl">
+            <label for="kernelSlider">
+              Kernel width
+              <output id="kernelValue">0.65</output>
+            </label>
+            <input id="kernelSlider" type="range" min="0.25" max="1.80" step="0.05" value="0.65" />
+          </div>
+
+          <div class="slider-group" id="hiddenUnitsControl">
+            <label for="hiddenUnitsSlider">
+              Hidden units
+              <output id="hiddenUnitsValue">9</output>
+            </label>
+            <input id="hiddenUnitsSlider" type="range" min="3" max="16" step="1" value="9" />
+          </div>
+
+          <div class="slider-group" id="nnRateControl">
+            <label for="nnRateSlider">
+              NN learning rate
+              <output id="nnRateValue">0.035</output>
+            </label>
+            <input id="nnRateSlider" type="range" min="0.005" max="0.080" step="0.005" value="0.035" />
+          </div>
+
+          <div class="slider-group" id="nnEpochsControl">
+            <label for="nnEpochsSlider">
+              NN epochs
+              <output id="nnEpochsValue">180</output>
+            </label>
+            <input id="nnEpochsSlider" type="range" min="40" max="320" step="20" value="180" />
+          </div>
+
+          <div class="slider-group" id="forestTreesControl">
+            <label for="forestTreesSlider">
+              Number of trees
+              <output id="forestTreesValue">9</output>
+            </label>
+            <input id="forestTreesSlider" type="range" min="3" max="31" step="2" value="9" />
+          </div>
+
+          <div class="slider-group" id="boostRateControl">
+            <label for="boostRateSlider">
+              Boost learning rate
+              <output id="boostRateValue">0.62</output>
+            </label>
+            <input id="boostRateSlider" type="range" min="0.10" max="1.00" step="0.04" value="0.62" />
+          </div>
+
+          <div class="slider-group" id="boostRoundsControl">
+            <label for="boostRoundsSlider">
+              Boosting rounds
+              <output id="boostRoundsValue">6</output>
+            </label>
+            <input id="boostRoundsSlider" type="range" min="2" max="24" step="1" value="6" />
+          </div>
+
+          <div class="control-group" id="gmmShapeControl">
+            <label for="gmmShapeSelect">Covariance shape</label>
+            <select id="gmmShapeSelect">
+              <option value="elliptical" selected>Elliptical</option>
+              <option value="spherical">Spherical</option>
+            </select>
+          </div>
+
+          <div class="control-group" id="gmmAssignmentControl">
+            <label for="gmmAssignmentSelect">GMM assignment</label>
+            <select id="gmmAssignmentSelect">
+              <option value="soft" selected>Soft</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+
+          <div class="slider-group" id="graphNeighborsControl">
+            <label for="graphNeighborsSlider">
+              Graph neighbors
+              <output id="graphNeighborsValue">8</output>
+            </label>
+            <input id="graphNeighborsSlider" type="range" min="4" max="20" step="1" value="8" />
+          </div>
+
+          <div class="slider-group" id="minClusterSizeControl">
+            <label for="minClusterSizeSlider">
+              Minimum cluster size
+              <output id="minClusterSizeValue">8</output>
+            </label>
+            <input id="minClusterSizeSlider" type="range" min="4" max="40" step="2" value="8" />
+          </div>
+
+          <div class="button-row">
+            <button id="regenerateButton" class="primary-button" type="button">Regenerate data</button>
+            <button id="stepButton" type="button">Step</button>
+          </div>
+        </aside>
+
+        <section class="visual-panel" aria-label="Visualization">
+          <div class="visual-header">
+            <div>
+              <h2 id="modelTitle">Logistic regression</h2>
+              <p id="modelSubtitle">A linear separator learned from labeled examples.</p>
+              <a id="modelWikiLink" class="model-wiki-link" href="https://en.wikipedia.org/wiki/Logistic_regression" target="_blank" rel="noreferrer">
+                Wikipedia
+              </a>
+            </div>
+            <div class="legend" id="legend"></div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="chart" viewBox="0 0 820 560" role="img" aria-labelledby="modelTitle modelSubtitle"></svg>
+          </div>
+        </section>
+
+        <aside class="explain-panel" aria-label="Explanation">
+          <div class="metric-grid">
+            <div>
+              <span class="metric-label">Fit quality</span>
+              <strong id="metricFit">--</strong>
+            </div>
+            <div>
+              <span class="metric-label">Complexity</span>
+              <strong id="metricComplexity">--</strong>
+            </div>
+            <div>
+              <span class="metric-label">Current step</span>
+              <strong id="metricStep">1</strong>
+            </div>
+          </div>
+
+          <section>
+            <h3>How to read it</h3>
+            <p id="readText"></p>
+          </section>
+
+          <section>
+            <h3>What the model is doing</h3>
+            <ul id="modelNotes"></ul>
+          </section>
+
+          <section>
+            <h3>When it works well</h3>
+            <p id="useCaseText"></p>
+          </section>
+        </aside>
+      </section>
+
+      <footer class="site-footer">
+        2026 <a href="https://www.danielpradilla.info/" target="_blank" rel="noreferrer">danielpradilla.info</a>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="shared-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

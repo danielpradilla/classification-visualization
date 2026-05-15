@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classification Visualizer Styleguide</title>
+    <meta name="description" content="Visual styleguide for the Classification Model Visualizer interface." />
+    <link rel="stylesheet" href="shared.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+  </head>
+  <body>
+    <main class="styleguide-shell">
+      <header class="styleguide-topbar">
+        <div>
+          <h1>Visual Styleguide</h1>
+        </div>
+        <nav class="header-nav" aria-label="Related pages">
+          <a class="back-link" href="index.html">Single model view</a>
+          <a class="model-wall-link" href="compare.html">Classification Model Wall</a>
+        </nav>
+      </header>
+
+      <section class="styleguide-section">
+        <div>
+          <p class="eyebrow">Foundation</p>
+          <h2>Typography and Color</h2>
+          <p class="section-copy">
+            The interface uses a light editorial surface, hairline borders, system typography, and low-contrast support text.
+          </p>
+        </div>
+        <div class="spec-grid">
+          <article class="spec-panel">
+            <h3>Type Scale</h3>
+            <h1 class="type-sample">Classification, visualized</h1>
+            <h2>Model title</h2>
+            <h3>Panel heading</h3>
+            <p>
+              Explanation copy uses the same muted tone and line height across the single model view, model wall, and styleguide.
+            </p>
+          </article>
+          <article class="spec-panel">
+            <h3>Palette</h3>
+            <div id="paletteSwatches" class="swatch-grid" aria-label="Model palette swatches"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="styleguide-section">
+        <div>
+          <p class="eyebrow">Controls</p>
+          <h2>Inputs and Actions</h2>
+        </div>
+        <div class="control-demo">
+          <div class="split-control" role="group" aria-label="Mode">
+            <button class="mode-tab active" type="button">Supervised</button>
+            <button class="mode-tab" type="button">Unsupervised</button>
+          </div>
+          <div class="control-group">
+            <label for="styleguideSelect">Dataset</label>
+            <select id="styleguideSelect">
+              <option>Interlocking moons</option>
+              <option>Nested rings</option>
+            </select>
+          </div>
+          <div class="slider-group">
+            <label for="styleguideRange">
+              Noise
+              <output>0.12</output>
+            </label>
+            <input id="styleguideRange" type="range" min="0" max="0.34" step="0.02" value="0.12" />
+          </div>
+          <button class="primary-button" type="button">Regenerate data</button>
+          <button type="button">Step</button>
+        </div>
+      </section>
+
+      <section class="styleguide-section">
+        <div>
+          <p class="eyebrow">Information</p>
+          <h2>Summary and Metrics</h2>
+        </div>
+        <div class="summary-demo">
+          <div>
+            <span class="summary-label">How to read it</span>
+            <strong>
+              Interlocking moons. Every panel trains on the same generated data. Pale regions show predicted class,
+              filled points show the true class, and outlined dots are holdout examples.
+            </strong>
+          </div>
+          <div>
+            <span class="summary-label">Best holdout score</span>
+            <strong>RBF kernel SVM (91%)</strong>
+          </div>
+        </div>
+        <div class="metric-grid">
+          <div>
+            <span class="metric-label">Fit quality</span>
+            <strong>91% holdout accuracy</strong>
+          </div>
+          <div>
+            <span class="metric-label">Complexity</span>
+            <strong>High</strong>
+          </div>
+          <div>
+            <span class="metric-label">Current step</span>
+            <strong>3</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="styleguide-section">
+        <div>
+          <p class="eyebrow">Cards</p>
+          <h2>Model Card and Explanation Panel</h2>
+        </div>
+        <div class="card-demo">
+          <article class="model-card leader">
+            <header class="model-card-header">
+              <div>
+                <h2>RBF kernel SVM</h2>
+                <p class="model-subtitle">A margin classifier whose boundary bends through a radial kernel.</p>
+                <a class="model-wiki-link" href="https://en.wikipedia.org/wiki/Radial_basis_function_kernel" target="_blank" rel="noreferrer">Wikipedia</a>
+              </div>
+              <div class="score-pill">91%</div>
+            </header>
+            <svg class="mini-chart" viewBox="0 0 320 234" role="img" aria-label="Styleguide chart example">
+              <rect class="domain-bg" x="24" y="24" width="136" height="186" fill="#2563eb"></rect>
+              <rect class="domain-bg" x="160" y="24" width="136" height="186" fill="#c2413f"></rect>
+              <rect class="axis-frame" x="24" y="24" width="272" height="186"></rect>
+              <line class="axis-line" x1="24" x2="296" y1="117" y2="117"></line>
+              <line class="axis-line" x1="160" x2="160" y1="24" y2="210"></line>
+              <circle class="sample-point" cx="86" cy="98" r="4" fill="#2563eb"></circle>
+              <circle class="sample-point test correct" cx="118" cy="128" r="5" fill="#2563eb"></circle>
+              <circle class="sample-point test wrong" cx="205" cy="102" r="5.5" fill="#c2413f"></circle>
+              <path class="boundary-line" d="M 34 184 C 104 112, 194 118, 286 52"></path>
+            </svg>
+            <footer class="model-card-footer">
+              <div class="model-controls">
+                <div class="model-control">
+                  <label>Width <output>0.65</output></label>
+                  <input type="range" min="0.25" max="1.8" step="0.05" value="0.65" />
+                </div>
+                <div class="model-control">
+                  <label>C <output>1.0</output></label>
+                  <input type="range" min="0.1" max="5" step="0.1" value="1" />
+                </div>
+              </div>
+              <p class="param-line">width 0.65, C 1.0 · High complexity</p>
+              <p class="correct-line">29/32 holdout correct</p>
+            </footer>
+          </article>
+
+          <aside class="explain-panel">
+            <section>
+              <h3>What the model is doing</h3>
+              <ul>
+                <li>Compares points by distance instead of drawing one straight line.</li>
+                <li>Support vectors shape local bends in the boundary.</li>
+              </ul>
+            </section>
+            <section>
+              <h3>When it works well</h3>
+              <p>Nonlinear binary classification when curved boundaries matter.</p>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section class="styleguide-section">
+        <div>
+          <p class="eyebrow">Marks</p>
+          <h2>Chart Vocabulary</h2>
+        </div>
+        <div class="mark-grid">
+          <span><i class="mark-dot blue"></i> Class or cluster point</span>
+          <span><i class="mark-dot red"></i> Second class or cluster</span>
+          <span><i class="mark-dot neutral"></i> Noise point</span>
+          <span><i class="mark-line"></i> Decision boundary</span>
+          <span><i class="mark-cross">+</i> Centroid</span>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        2026 <a href="https://www.danielpradilla.info/" target="_blank" rel="noreferrer">danielpradilla.info</a>
+      </footer>
+    </main>
+
+    <script src="shared-data.js"></script>
+    <script src="styleguide.js"></script>
+  </body>
+</html>

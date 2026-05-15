@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classification Model Wall</title>
+    <meta
+      name="description"
+      content="Side-by-side small multiple comparison of supervised classification models on the same dataset."
+    />
+    <link rel="stylesheet" href="shared.css" />
+    <link rel="stylesheet" href="compare.css" />
+  </head>
+  <body>
+    <main class="compare-shell">
+      <header class="compare-topbar">
+        <div>
+          <h1>Classification Model Wall</h1>
+        </div>
+        <nav class="header-nav" aria-label="Related pages">
+          <a class="back-link" href="index.html">Single model view</a>
+          <a class="styleguide-link" href="styleguide.html">Styleguide</a>
+        </nav>
+      </header>
+
+      <section class="compare-controls" aria-label="Dataset controls">
+        <div class="split-control" role="group" aria-label="Mode">
+          <button class="mode-tab active" type="button" data-mode="supervised">Supervised</button>
+          <button class="mode-tab" type="button" data-mode="unsupervised">Unsupervised</button>
+        </div>
+
+        <div class="control-group">
+          <label for="datasetSelect">Dataset</label>
+          <select id="datasetSelect"></select>
+        </div>
+
+        <div class="slider-group">
+          <label for="sampleSlider">
+            Samples
+            <output id="sampleValue">180</output>
+          </label>
+          <input id="sampleSlider" type="range" min="80" max="300" step="20" value="180" />
+        </div>
+
+        <div class="slider-group">
+          <label for="noiseSlider">
+            Noise
+            <output id="noiseValue">0.12</output>
+          </label>
+          <input id="noiseSlider" type="range" min="0" max="0.34" step="0.02" value="0.12" />
+        </div>
+
+        <button id="regenerateButton" class="primary-button" type="button">Regenerate data</button>
+      </section>
+
+      <section class="compare-summary" aria-label="Comparison summary">
+        <div>
+          <span class="summary-label">How to read it</span>
+          <strong id="readSummary">--</strong>
+        </div>
+        <div>
+          <span class="summary-label" id="scoreSummaryLabel">Best holdout score</span>
+          <strong id="bestModel">--</strong>
+        </div>
+      </section>
+
+      <section id="modelWall" class="model-wall" aria-label="Side-by-side model comparison"></section>
+
+      <footer class="compare-footer">
+        2026 <a href="https://www.danielpradilla.info/" target="_blank" rel="noreferrer">danielpradilla.info</a>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="shared-data.js"></script>
+    <script src="compare.js"></script>
+  </body>
+</html>
