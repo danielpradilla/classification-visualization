@@ -255,11 +255,15 @@ const datasetCatalog = {
     { id: "spiral", name: "Twin spirals" },
   ],
   unsupervised: [
+    { id: "bridge", name: "Bridge / noisy connector" },
     { id: "clusters", name: "Cluster islands" },
+    { id: "concentric-blobs", name: "Concentric blobs" },
     { id: "variable-size", name: "Variable size clusters" },
     { id: "density", name: "Variable density" },
     { id: "chain", name: "Curved chain" },
+    { id: "elongated", name: "Elongated clusters" },
     { id: "nested-rings", name: "Nested rings" },
+    { id: "outliers", name: "Outlier-heavy clusters" },
   ],
 };
 

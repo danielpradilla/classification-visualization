@@ -258,6 +258,60 @@ function generateData() {
       x = (left ? -1.15 : 1.15) + gaussian(random) * (0.62 + noise);
       y = (left ? -0.45 : 0.45) + gaussian(random) * (0.56 + noise);
       label = left ? 0 : 1;
+    } else if (state.dataset === "concentric-blobs") {
+      const inner = i < n * 0.45;
+      const t = random() * Math.PI * 2;
+      const r = inner ? Math.abs(gaussian(random)) * (0.24 + noise) : 1.55 + gaussian(random) * (0.18 + noise);
+      x = Math.cos(t) * r + gaussian(random) * noise * 0.35;
+      y = Math.sin(t) * r + gaussian(random) * noise * 0.35;
+      label = inner ? 0 : 1;
+    } else if (state.dataset === "bridge") {
+      const bucket = random();
+      if (bucket < 0.42) {
+        x = -1.65 + gaussian(random) * (0.32 + noise);
+        y = -0.25 + gaussian(random) * (0.34 + noise);
+        label = 0;
+      } else if (bucket < 0.84) {
+        x = 1.65 + gaussian(random) * (0.32 + noise);
+        y = 0.35 + gaussian(random) * (0.34 + noise);
+        label = 1;
+      } else {
+        const t = random();
+        x = -1.55 + t * 3.1 + gaussian(random) * (0.08 + noise * 0.7);
+        y = -0.2 + t * 0.55 + gaussian(random) * (0.08 + noise * 0.7);
+        label = 2;
+      }
+    } else if (state.dataset === "elongated") {
+      const cluster = i % 3;
+      const centers = [
+        { x: -1.45, y: -0.95, angle: 0.72, long: 0.95, short: 0.16 },
+        { x: 1.25, y: -0.45, angle: -0.55, long: 1.05, short: 0.18 },
+        { x: -0.05, y: 1.25, angle: 0.08, long: 1.2, short: 0.14 },
+      ];
+      const c = centers[cluster];
+      const u = gaussian(random);
+      const v = gaussian(random);
+      x = c.x + Math.cos(c.angle) * u * (c.long + noise) - Math.sin(c.angle) * v * (c.short + noise * 0.6);
+      y = c.y + Math.sin(c.angle) * u * (c.long + noise) + Math.cos(c.angle) * v * (c.short + noise * 0.6);
+      label = cluster;
+    } else if (state.dataset === "outliers") {
+      const outlier = random() > 0.82;
+      if (outlier) {
+        x = -2.65 + random() * 5.3;
+        y = -2.45 + random() * 4.9;
+        label = -1;
+      } else {
+        const cluster = i % 3;
+        const centers = [
+          { x: -1.35, y: 0.95, s: 0.3 },
+          { x: 1.3, y: 0.85, s: 0.34 },
+          { x: 0.05, y: -1.25, s: 0.38 },
+        ];
+        const c = centers[cluster];
+        x = c.x + gaussian(random) * (c.s + noise);
+        y = c.y + gaussian(random) * (c.s + noise);
+        label = cluster;
+      }
     } else if (state.dataset === "nested-rings") {
       const ring = i % 3;
       const radii = [0.62, 1.38, 2.18];
