@@ -44,29 +44,6 @@ input {
   padding: 10px 0 18px;
 }
 
-.compare-topbar {
-  min-height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 22px;
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: 14px;
-}
-
-.back-link {
-  display: inline-block;
-  color: #666666;
-  font-size: 0.86rem;
-  text-decoration: none;
-  white-space: nowrap;
-  border-bottom: 1px solid var(--gray-blue);
-}
-
-.back-link:hover {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-}
 
 h1,
 h2,
@@ -400,23 +377,6 @@ a:focus-visible {
   white-space: nowrap;
 }
 
-.compare-footer {
-  margin-top: 14px;
-  color: var(--secondary);
-  font-size: 0.68rem;
-  text-align: right;
-}
-
-.compare-footer a {
-  color: #666666;
-  text-decoration: none;
-  border-bottom: 1px solid var(--gray-blue);
-}
-
-.compare-footer a:hover {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-}
 
 @media (max-width: 1280px) {
   .compare-controls {
@@ -433,11 +393,6 @@ a:focus-visible {
     width: min(100vw - 18px, 820px);
   }
 
-  .compare-topbar {
-    align-items: flex-start;
-    flex-direction: column;
-    padding-bottom: 18px;
-  }
 
   .compare-summary {
     grid-template-columns: 1fr;
@@ -452,11 +407,8 @@ a:focus-visible {
   }
 }
 
-@media (max-width: 620px) {
-  h1 {
-    font-size: clamp(2.1rem, 14vw, 3.45rem);
-  }
 
+@media (max-width: 620px) {
   .compare-controls,
   .model-wall {
     grid-template-columns: 1fr;

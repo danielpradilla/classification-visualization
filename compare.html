@@ -22,14 +22,25 @@
   </head>
   <body>
     <main class="compare-shell">
-      <header class="compare-topbar">
-        <div>
-          <h1>Classification Model Wall</h1>
-        </div>
-        <nav class="header-nav" aria-label="Related pages">
-          <a class="back-link" href="index.html">Single model view</a>
+      <header class="dp-navbar">
+        <a class="dp-navbar-brand" href="/projects/">Daniel Pradilla</a>
+        <nav class="dp-navbar-links" aria-label="Site navigation">
+          <a href="index.html">Single model view</a>
+          <a href="/blog/">Blog</a>
+          <a href="https://github.com/danielpradilla/classification-visualization">GitHub</a>
         </nav>
+        <details class="dp-navbar-menu">
+          <summary aria-label="Menu">&#9776;</summary>
+          <nav aria-label="Site navigation menu">
+            <a href="index.html">Single model view</a>
+            <a href="/blog/">Blog</a>
+            <a href="https://github.com/danielpradilla/classification-visualization">GitHub</a>
+          </nav>
+        </details>
       </header>
+      <div class="dp-project-header">
+        <h1>Classification Model Wall</h1>
+      </div>
 
       <section class="compare-controls" aria-label="Dataset controls">
         <div class="split-control" role="group" aria-label="Mode">
@@ -74,8 +85,13 @@
 
       <section id="modelWall" class="model-wall" aria-label="Side-by-side model comparison"></section>
 
-      <footer class="compare-footer">
-        2026 <a href="https://www.danielpradilla.info/" target="_blank" rel="noreferrer">danielpradilla.info</a>
+      <footer class="dp-footer">
+        <span>&copy; 2026 Daniel Pradilla</span>
+        <nav aria-label="Footer navigation">
+          <a href="/projects/">Projects</a>
+          <a href="/blog/">Blog</a>
+          <a href="https://github.com/danielpradilla/classification-visualization">GitHub</a>
+        </nav>
       </footer>
     </main>
 
